@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.lastfm.R;
 import com.example.lastfm.adapters.TopTracksAdapter;
 import com.example.lastfm.models.TopTracksResponse;
@@ -21,19 +22,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private TopTracks topTracksImpl;
+    private TopTracksRepository topTracksImpl;
     private TopTracksAdapter mAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = findViewById(R.id.recycler_view);
-        //используем это для ускорения производительности
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new TopTracksAdapter();
-        recyclerView.setAdapter(mAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
@@ -41,7 +37,24 @@ public class MainActivity extends AppCompatActivity {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
-        topTracksImpl = new TopTracksImpl(retrofit);
+        topTracksImpl = new TopTracksRepositoryImpl(retrofit);
+
+        recyclerView = findViewById(R.id.recycler_view);
+        //используем это для ускорения производительности
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new TopTracksAdapter();
+        recyclerView.setAdapter(mAdapter);
+
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> getTracks());
+        swipeRefreshLayout.setRefreshing(true);
+        getTracks();
+    }
+
+    private void getTracks()
+    {
         Single<TopTracksResponse> tracks = topTracksImpl.getTopTracks(Constants.DEFAULT_LASTFM_USER, Constants.TOP_ITEMS_LIMIT, Constants.API_KEY);
 
         tracks.subscribeOn(Schedulers.io())
@@ -50,11 +63,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(TopTracksResponse trackList) {
                         mAdapter.setItems(trackList);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Snackbar.make(recyclerView, e.getMessage(), Snackbar.LENGTH_LONG);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
