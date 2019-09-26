@@ -5,10 +5,10 @@ import com.example.lastfm.network.TopTrackApiMetod;
 import io.reactivex.Single;
 import retrofit2.Retrofit;
 
-public class TopTracksRepositoryImpl implements TopTracksRepository {
+public class TopTracksInteractorImpl implements TopTracksInteractor {
     private Retrofit mRetrofit;
 
-    TopTracksRepositoryImpl(Retrofit retrofit) {
+    TopTracksInteractorImpl(Retrofit retrofit) {
         mRetrofit = retrofit;
     }
 
