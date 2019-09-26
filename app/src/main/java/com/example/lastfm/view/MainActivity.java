@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Snackbar.make(recyclerView, e.getMessage(), Snackbar.LENGTH_LONG);
+                        Snackbar.make(recyclerView, e.getMessage(), Snackbar.LENGTH_LONG).show();
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });
