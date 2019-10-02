@@ -1,4 +1,4 @@
-package com.example.lastfm.presentation.toptracks.view;
+package com.example.lastfm.toptracks.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.lastfm.R;
-import com.example.lastfm.models.data.ImageItem;
-import com.example.lastfm.models.data.Track;
-import com.example.lastfm.models.data.Tracks;
+import com.example.lastfm.core.models.data.ImageItem;
+import com.example.lastfm.core.models.data.Track;
+import com.example.lastfm.core.models.data.Tracks;
 import com.squareup.picasso.Picasso;
 
 public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.ViewHolder> {

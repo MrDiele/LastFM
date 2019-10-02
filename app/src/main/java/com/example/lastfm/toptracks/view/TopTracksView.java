@@ -1,6 +1,6 @@
-package com.example.lastfm.presentation.toptracks.view;
+package com.example.lastfm.toptracks.view;
 
-import com.example.lastfm.models.data.Tracks;
+import com.example.lastfm.core.models.data.Tracks;
 
 public interface TopTracksView {
     void updateTrack(Tracks tracks);

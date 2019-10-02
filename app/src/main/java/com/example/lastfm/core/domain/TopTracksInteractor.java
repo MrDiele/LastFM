@@ -1,6 +1,6 @@
-package com.example.lastfm.domain;
+package com.example.lastfm.core.domain;
 
-import com.example.lastfm.models.data.TopTracksResponse;
+import com.example.lastfm.core.models.data.TopTracksResponse;
 import io.reactivex.Single;
 
 public interface TopTracksInteractor {

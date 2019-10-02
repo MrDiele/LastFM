@@ -1,9 +1,9 @@
 package com.example.lastfm;
 
 import android.app.Application;
-import com.example.lastfm.di.DaggerTopTrackComponent;
-import com.example.lastfm.di.TopTrackComponent;
-import com.example.lastfm.di.TopTracksModule;
+import com.example.lastfm.core.di.DaggerTopTrackComponent;
+import com.example.lastfm.core.di.TopTrackComponent;
+import com.example.lastfm.core.di.TopTracksModule;
 
 public class App extends Application {
 

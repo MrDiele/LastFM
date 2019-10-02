@@ -1,10 +1,10 @@
-package com.example.lastfm.presentation.toptracks;
+package com.example.lastfm.toptracks.presentation;
 
-import com.example.lastfm.data.Constants;
-import com.example.lastfm.domain.TopTracksInteractor;
-import com.example.lastfm.models.data.TopTracksResponse;
-import com.example.lastfm.models.data.Tracks;
-import com.example.lastfm.presentation.toptracks.view.TopTracksView;
+import com.example.lastfm.core.data.Constants;
+import com.example.lastfm.core.domain.TopTracksInteractor;
+import com.example.lastfm.core.models.data.TopTracksResponse;
+import com.example.lastfm.core.models.data.Tracks;
+import com.example.lastfm.toptracks.view.TopTracksView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableSingleObserver;

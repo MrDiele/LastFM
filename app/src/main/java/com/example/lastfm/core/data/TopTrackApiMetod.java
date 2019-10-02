@@ -1,6 +1,6 @@
-package com.example.lastfm.data;
+package com.example.lastfm.core.data;
 
-import com.example.lastfm.models.data.TopTracksResponse;
+import com.example.lastfm.core.models.data.TopTracksResponse;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

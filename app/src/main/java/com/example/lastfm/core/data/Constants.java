@@ -1,4 +1,4 @@
-package com.example.lastfm.data;
+package com.example.lastfm.core.data;
 
 public class Constants {
     public static final String API_KEY = "945c9ddc9c3c5d11528608afc4af8a30";

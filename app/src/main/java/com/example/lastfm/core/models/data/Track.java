@@ -1,4 +1,4 @@
-package com.example.lastfm.models.data;
+package com.example.lastfm.core.models.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

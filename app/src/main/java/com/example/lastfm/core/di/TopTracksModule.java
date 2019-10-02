@@ -1,8 +1,8 @@
-package com.example.lastfm.di;
+package com.example.lastfm.core.di;
 
-import com.example.lastfm.data.Constants;
-import com.example.lastfm.domain.TopTracksInteractor;
-import com.example.lastfm.domain.TopTracksInteractorImpl;
+import com.example.lastfm.core.data.Constants;
+import com.example.lastfm.core.domain.TopTracksInteractor;
+import com.example.lastfm.core.domain.TopTracksInteractorImpl;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
