@@ -1,8 +1,8 @@
 package com.example.lastfm.core.di;
 
 import com.example.lastfm.core.data.Constants;
-import com.example.lastfm.core.domain.TopTracksInteractor;
-import com.example.lastfm.core.domain.TopTracksInteractorImpl;
+import com.example.lastfm.core.domain.Interactor;
+import com.example.lastfm.core.domain.InteractorImpl;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -10,7 +10,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class TopTracksModule {
+public class NetworkModule {
 
     @Provides
     Retrofit providesRetrofit() {
@@ -22,7 +22,7 @@ public class TopTracksModule {
     }
 
     @Provides
-    TopTracksInteractor topTracksInteractor(Retrofit retrofit) {
-        return new TopTracksInteractorImpl(retrofit);
+    Interactor topTracksInteractor(Retrofit retrofit) {
+        return new InteractorImpl(retrofit);
     }
 }

@@ -3,6 +3,8 @@ package com.example.lastfm.core.models.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Artist {
     @SerializedName("name")
     @Expose
@@ -13,6 +15,12 @@ public class Artist {
     @SerializedName("url")
     @Expose
     private String url;
+    @SerializedName("playcount")
+    @Expose
+    private String playcount;
+    @SerializedName("image")
+    @Expose
+    private List<ImageItem> image = null;
 
     public String getName() {
         return name;
@@ -36,5 +44,21 @@ public class Artist {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPlayCount() {
+        return playcount;
+    }
+
+    public void setPlayCount(String playCount) {
+        this.playcount = playCount;
+    }
+
+    public List<ImageItem> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageItem> image) {
+        this.image = image;
     }
 }

@@ -1,25 +1,23 @@
 package com.example.lastfm;
 
 import android.app.Application;
-import com.example.lastfm.core.di.DaggerTopTrackComponent;
-import com.example.lastfm.core.di.TopTrackComponent;
-import com.example.lastfm.core.di.TopTracksModule;
+import com.example.lastfm.core.di.DaggerNetworkComponent;
+import com.example.lastfm.core.di.NetworkComponent;
+import com.example.lastfm.core.di.NetworkModule;
 
 public class App extends Application {
 
-    private TopTrackComponent topTrackComponent;
+    private NetworkComponent networkComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        topTrackComponent = DaggerTopTrackComponent
-                .builder()
-                .topTracksModule(new TopTracksModule())
+        networkComponent = DaggerNetworkComponent.builder()
+                .networkModule(new NetworkModule())
                 .build();
     }
 
-    public TopTrackComponent getTopTrackComponent() {
-        return topTrackComponent;
+    public NetworkComponent getNetworkComponent() {
+        return networkComponent;
     }
 }

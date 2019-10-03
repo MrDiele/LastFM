@@ -72,7 +72,6 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
 
         private void setArtistName(String artistName) {
             artistNameTextView.setText(artistName);
-            artistNameTextView.setText(artistName);
         }
 
         private void setImage(String imageUrl) {

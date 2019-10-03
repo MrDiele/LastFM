@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.lastfm.App;
 import com.example.lastfm.R;
-import com.example.lastfm.core.domain.TopTracksInteractor;
+import com.example.lastfm.core.domain.Interactor;
 import com.example.lastfm.core.models.data.Tracks;
 import com.example.lastfm.toptracks.presentation.TopTracksPresenter;
 import com.example.lastfm.toptracks.presentation.TopTracksPresenterImpl;
@@ -21,19 +21,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import javax.inject.Inject;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TopTracksFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TopTracksFragment extends Fragment implements TopTracksView {
     private TopTracksPresenter topTracksPresenterImpl;
     private TopTracksAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject
-    TopTracksInteractor topTracksImpl;
+    Interactor topTracksImpl;
 
     public TopTracksFragment() {
         // Required empty public constructor
@@ -46,7 +40,7 @@ public class TopTracksFragment extends Fragment implements TopTracksView {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        ((App) requireActivity().getApplication()).getTopTrackComponent().inject(this);
+        ((App) requireActivity().getApplication()).getNetworkComponent().inject(this);
     }
 
     @Override
