@@ -84,7 +84,7 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
         }
 
         private void setListeners(String listeners) {
-            listenersTextView.setText("Слушателей: " + listeners);
+            listenersTextView.setText("Listeners: " + listeners);
         }
     }
 }
