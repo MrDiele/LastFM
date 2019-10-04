@@ -7,19 +7,19 @@ import io.reactivex.Single;
 import retrofit2.Retrofit;
 
 public class InteractorImpl implements Interactor {
-    private Retrofit mRetrofit;
+    private ApiMethods api;
 
     public InteractorImpl(Retrofit retrofit) {
-        mRetrofit = retrofit;
+        api = retrofit.create(ApiMethods.class);
     }
 
     @Override
     public Single<TopTracksResponse> getTopTracks(String userName, int limit, String apiKey) {
-        return mRetrofit.create(ApiMethods.class).getTracks(userName, limit, apiKey);
+        return api.getTracks(userName, limit, apiKey);
     }
 
     @Override
     public Single<TopArtistsResponse> getTopArtists(String userName, int limit, String apiKey) {
-        return mRetrofit.create(ApiMethods.class).getArtists(userName, limit, apiKey);
+        return api.getArtists(userName, limit, apiKey);
     }
 }

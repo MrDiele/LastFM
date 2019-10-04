@@ -18,6 +18,9 @@ public class Artist {
     @SerializedName("playcount")
     @Expose
     private String playcount;
+    @SerializedName("listeners")
+    @Expose
+    private String listeners;
     @SerializedName("image")
     @Expose
     private List<ImageItem> image = null;
@@ -52,6 +55,14 @@ public class Artist {
 
     public void setPlayCount(String playCount) {
         this.playcount = playCount;
+    }
+
+    public String getListeners() {
+        return listeners;
+    }
+
+    public void setListeners(String listeners) {
+        this.listeners = listeners;
     }
 
     public List<ImageItem> getImage() {

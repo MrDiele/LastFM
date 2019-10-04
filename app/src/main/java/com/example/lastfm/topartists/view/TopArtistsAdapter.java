@@ -19,19 +19,19 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View artistItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.artist_item, parent, false);
-        return new TopArtistsAdapter.ViewHolder(artistItem);
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.artist_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setArtist(artists.getArtist().get(position));
+        holder.setArtist(artists.getArtists().get(position), position);
     }
 
     @Override
     public int getItemCount() {
         if (artists != null) {
-            return artists.getArtist().size();
+            return artists.getArtists().size();
         }
         return 0;
     }
@@ -41,21 +41,24 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView playCountTextView;
-        private TextView artistNameTextView;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView positionTextView;
         private ImageView imageView;
+        private TextView artistNameTextView;
+        private TextView listenersTextView;
 
-        public ViewHolder(View itemView) {
+
+        ViewHolder(View itemView) {
             super(itemView);
-            artistNameTextView = itemView.findViewById(R.id.artist);
-            playCountTextView = itemView.findViewById(R.id.artist_playCount);
+            positionTextView = itemView.findViewById(R.id.position_artist);
             imageView = itemView.findViewById(R.id.image_artist);
+            artistNameTextView = itemView.findViewById(R.id.artist_name);
+            listenersTextView = itemView.findViewById(R.id.artist_listeners);
         }
 
-        public void setArtist(Artist artist) {
-            setArtistName(artist.getName());
-            setPlayCount(artist.getPlayCount());
+        void setArtist(Artist artist, int position) {
+            setPositionTextView(position + 1);
+
             if (artist.getImage() != null && artist.getImage().size() > 0) {
                 for (ImageItem img : artist.getImage()) {
                     if (img.getSize().equalsIgnoreCase("large")) {
@@ -63,18 +66,25 @@ public class TopArtistsAdapter extends RecyclerView.Adapter<TopArtistsAdapter.Vi
                     }
                 }
             }
+
+            setArtistName(artist.getName());
+            setListeners(artist.getListeners());
+        }
+
+        private void setPositionTextView(int position) {
+            positionTextView.setText(String.valueOf(position));
+        }
+
+        private void setImage(String imageUrl) {
+            Picasso.get().load(imageUrl).into(imageView);
         }
 
         private void setArtistName(String artistName) {
             artistNameTextView.setText(artistName);
         }
 
-        private void setPlayCount(String playCount) {
-            playCountTextView.setText(playCount);
-        }
-
-        private void setImage(String imageUrl) {
-            Picasso.get().load(imageUrl).into(imageView);
+        private void setListeners(String listeners) {
+            listenersTextView.setText("Слушателей: " + listeners);
         }
     }
 }

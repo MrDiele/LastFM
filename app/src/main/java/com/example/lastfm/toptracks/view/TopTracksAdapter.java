@@ -20,12 +20,12 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
     @Override
     public TopTracksAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View songItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_item, parent, false);
-        return new TopTracksAdapter.ViewHolder(songItem);
+        return new ViewHolder(songItem);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TopTracksAdapter.ViewHolder holder, int position) {
-        holder.setTrack(tracks.getTrack().get(position));
+        holder.setTrack(tracks.getTrack().get(position), position);
     }
 
     @Override
@@ -41,22 +41,25 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView positionTextView;
         private TextView songNameTextView;
         private TextView artistNameTextView;
         private ImageView imageView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
+            positionTextView = itemView.findViewById(R.id.position_track);
             songNameTextView = itemView.findViewById(R.id.song_name);
             artistNameTextView = itemView.findViewById(R.id.artist_name);
             imageView = itemView.findViewById(R.id.image_track);
         }
 
-        public void setTrack(Track track) {
-
+        void setTrack(Track track, int position) {
             setName(track.getName());
+            setPosition(position + 1);
             setArtistName(track.getArtist().getName());
+
             if (track.getImage() != null && track.getImage().size() > 0) {
                 for (ImageItem img : track.getImage()) {
                     if (img.getSize().equalsIgnoreCase("large")) {
@@ -68,6 +71,10 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
 
         private void setName(String songName) {
             songNameTextView.setText(songName);
+        }
+
+        private void setPosition(int position) {
+            positionTextView.setText(String.valueOf(position));
         }
 
         private void setArtistName(String artistName) {

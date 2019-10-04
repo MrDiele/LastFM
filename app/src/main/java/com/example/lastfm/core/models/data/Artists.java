@@ -1,21 +1,20 @@
 package com.example.lastfm.core.models.data;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Artists {
-    @SerializedName("track")
-    @Expose
-    private List<Artist> artist = new ArrayList<>();
 
-    public List<Artist> getArtist() {
-        return artist;
+    @SerializedName("artist")
+    private List<Artist> artists = new ArrayList<>();
+
+    public List<Artist> getArtists() {
+        return artists;
     }
 
-    public void setArtist(List<Artist> track) {
-        this.artist = artist;
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
     }
 }

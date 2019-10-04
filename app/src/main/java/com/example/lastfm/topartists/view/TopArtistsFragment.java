@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.lastfm.App;
@@ -29,12 +29,18 @@ public class TopArtistsFragment extends Fragment implements TopArtistsView {
     @Inject
     Interactor topArtistImpl;
 
+    public static TopArtistsFragment newInstance() {
+        return new TopArtistsFragment();
+    }
+
     public TopArtistsFragment() {
         // Required empty public constructor
     }
 
-    public static TopArtistsFragment newInstance() {
-        return new TopArtistsFragment();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new TopArtistsAdapter();
     }
 
     @Override
@@ -46,18 +52,15 @@ public class TopArtistsFragment extends Fragment implements TopArtistsView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new TopArtistsAdapter();
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
-        topArtistPresenterImpl = new TopArtistPresenterImpl(topArtistImpl, this);
         swipeRefreshLayout.setOnRefreshListener(() -> topArtistPresenterImpl.getTopArtists());
         swipeRefreshLayout.setRefreshing(true);
+
+        topArtistPresenterImpl = new TopArtistPresenterImpl(topArtistImpl, this);
         return view;
     }
 
