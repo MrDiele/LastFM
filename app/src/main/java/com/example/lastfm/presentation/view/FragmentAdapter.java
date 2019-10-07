@@ -32,8 +32,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
-            return "Tracks";
+            return "Top tracks";
         }
-        return "Artists";
+        return "Top artists";
     }
 }
