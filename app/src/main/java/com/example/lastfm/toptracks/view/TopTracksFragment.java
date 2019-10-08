@@ -14,6 +14,7 @@ import com.example.lastfm.App;
 import com.example.lastfm.R;
 import com.example.lastfm.core.domain.Interactor;
 import com.example.lastfm.core.models.data.Tracks;
+import com.example.lastfm.presentation.view.MainActivity;
 import com.example.lastfm.toptracks.presentation.TopTracksPresenter;
 import com.example.lastfm.toptracks.presentation.TopTracksPresenterImpl;
 import com.google.android.material.snackbar.Snackbar;
@@ -47,7 +48,7 @@ public class TopTracksFragment extends Fragment implements TopTracksView {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_top, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        adapter = new TopTracksAdapter();
+        adapter = new TopTracksAdapter((url, name) -> ((MainActivity) requireActivity()).onClick(url, name));
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);

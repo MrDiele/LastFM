@@ -11,16 +11,22 @@ import com.example.lastfm.R;
 import com.example.lastfm.core.models.data.ImageItem;
 import com.example.lastfm.core.models.data.Track;
 import com.example.lastfm.core.models.data.Tracks;
+import com.example.lastfm.presentation.view.InfoClickListener;
 import com.squareup.picasso.Picasso;
 
 public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.ViewHolder> {
+    private final InfoClickListener infoClickListener;
     private Tracks tracks = new Tracks();
+
+    public TopTracksAdapter(InfoClickListener infoClickListener) {
+        this.infoClickListener = infoClickListener;
+    }
 
     @NonNull
     @Override
     public TopTracksAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View songItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_item, parent, false);
-        return new ViewHolder(songItem);
+        return new ViewHolder(songItem, infoClickListener);
     }
 
     @Override
@@ -42,17 +48,19 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        private final InfoClickListener infoClickListener;
         private TextView positionTextView;
         private TextView songNameTextView;
         private TextView artistNameTextView;
         private ImageView imageView;
 
-        ViewHolder(View itemView) {
+        ViewHolder(View itemView, InfoClickListener infoClickListener) {
             super(itemView);
             positionTextView = itemView.findViewById(R.id.position_track);
             songNameTextView = itemView.findViewById(R.id.song_name);
             artistNameTextView = itemView.findViewById(R.id.artist_name);
             imageView = itemView.findViewById(R.id.image_track);
+            this.infoClickListener = infoClickListener;
         }
 
         void setTrack(Track track, int position) {
@@ -64,6 +72,7 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
                 for (ImageItem img : track.getImage()) {
                     if (img.getSize().equalsIgnoreCase("large")) {
                         setImage(img.getText());
+                        itemView.setOnClickListener((v) -> infoClickListener.onClick(img.getText(), track.getName()));
                     }
                 }
             }
