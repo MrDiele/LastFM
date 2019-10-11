@@ -22,19 +22,19 @@ import com.google.android.material.snackbar.Snackbar;
 import javax.inject.Inject;
 
 public class TopTracksFragment extends Fragment implements TopTracksView {
-    private TopTracksPresenter topTracksPresenterImpl;
     private TopTracksAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private TopTracksPresenter topTracksPresenterImpl;
 
     @Inject
     Interactor topTracksImpl;
 
-    public TopTracksFragment() {
-        // Required empty public constructor
-    }
-
     public static TopTracksFragment newInstance() {
         return new TopTracksFragment();
+    }
+
+    public TopTracksFragment() {
+        // Required empty public constructor
     }
 
     @Override

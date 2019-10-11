@@ -14,9 +14,9 @@ public class TopTracksPresenterImpl implements TopTracksPresenter {
     private Interactor interactor;
     private TopTracksView topTracksView;
 
-    public TopTracksPresenterImpl(Interactor interactor, TopTracksView mainView) {
+    public TopTracksPresenterImpl(Interactor interactor, TopTracksView topTracksView) {
         this.interactor = interactor;
-        this.topTracksView = mainView;
+        this.topTracksView = topTracksView;
         getTopTracks();
     }
 

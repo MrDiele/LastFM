@@ -64,9 +64,7 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
         }
 
         void setTrack(Track track, int position) {
-            setName(track.getName());
             setPosition(position + 1);
-            setArtistName(track.getArtist().getName());
 
             if (track.getImage() != null && track.getImage().size() > 0) {
                 for (ImageItem img : track.getImage()) {
@@ -76,22 +74,25 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
                     }
                 }
             }
-        }
 
-        private void setName(String songName) {
-            songNameTextView.setText(songName);
+            setTrackName(track.getName());
+            setArtistName(track.getArtist().getName());
         }
 
         private void setPosition(int position) {
             positionTextView.setText(String.valueOf(position));
         }
 
-        private void setArtistName(String artistName) {
-            artistNameTextView.setText(artistName);
-        }
-
         private void setImage(String imageUrl) {
             Picasso.get().load(imageUrl).into(imageView);
+        }
+
+        private void setTrackName(String songName) {
+            songNameTextView.setText(songName);
+        }
+
+        private void setArtistName(String artistName) {
+            artistNameTextView.setText(artistName);
         }
     }
 }
