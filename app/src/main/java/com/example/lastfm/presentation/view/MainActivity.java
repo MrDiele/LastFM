@@ -16,9 +16,11 @@ public class MainActivity extends AppCompatActivity implements InfoClickListener
         Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.cont, MainFragment.newInstance())
-                .commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.cont, MainFragment.newInstance())
+                    .commit();
+        }
     }
 
     @Override
